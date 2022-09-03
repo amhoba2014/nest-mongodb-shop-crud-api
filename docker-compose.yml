@@ -3,12 +3,6 @@ services:
   backend:
     build:
       context: ./backend
-      target: dev_image
-    ports:
-      - "3000:3000"
-    volumes:
-      - ./backend/source:/app
-    restart: always
     env_file:
       - shared.env
     depends_on:

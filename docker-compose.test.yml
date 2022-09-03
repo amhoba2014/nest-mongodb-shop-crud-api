@@ -3,4 +3,3 @@ services:
   backend:
     build:
       target: tests_image
-    restart: "no"

@@ -1,0 +1,10 @@
+version: "3.9"
+services:
+  backend:
+    build:
+      target: dev_image
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./backend/source:/app
+    restart: always
