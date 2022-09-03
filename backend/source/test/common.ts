@@ -11,4 +11,7 @@ export const resetState = async (module: TestingModule) => {
     await cartsService.deleteAll()
     await productsService.deleteAll()
     await usersService.deleteAll()
+
+    // no matter which one. they are all the same.
+    await usersService.connection.close()
 }

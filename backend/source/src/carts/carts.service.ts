@@ -1,12 +1,15 @@
 import { Injectable } from "@nestjs/common";
-import { InjectModel } from "@nestjs/mongoose";
-import { Model } from "mongoose";
+import { InjectConnection, InjectModel } from "@nestjs/mongoose";
+import { Connection, Model } from "mongoose";
 import { Carts, CartsDocument } from "./carts.schema";
 
 @Injectable()
 export class CartsService {
 
-  constructor(@InjectModel(Carts.name) private cartsModel: Model<CartsDocument>) { }
+  constructor(
+    @InjectModel(Carts.name) private cartsModel: Model<CartsDocument>,
+    @InjectConnection() public connection: Connection
+  ) { }
 
   async create(carts: Carts): Promise<Carts> {
     return await (new this.cartsModel(carts)).save();
