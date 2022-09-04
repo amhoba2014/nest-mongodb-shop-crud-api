@@ -63,7 +63,7 @@ This project is still in development. I will update the todo list here as I cont
 - [ ] Add a diagram to the `How to scale this?` part above.
 - [ ] Authentication. Currently everybody can use the REST api. Its a critical security issue. We should authorize users based on their roles and tokens.
 - [ ] Make mongodb instance persistent. Although its enough for testing, We should consider making this project be usable for production too.
-- [ ] The CI/CD pipeline is incomplete. Complete it.
+- [X] The CI/CD pipeline is incomplete. Complete it.
 
 
 ## License
