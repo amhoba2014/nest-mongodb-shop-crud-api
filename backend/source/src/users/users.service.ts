@@ -1,6 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { InjectConnection, InjectModel } from "@nestjs/mongoose";
-import { Connection, Model } from "mongoose";
+import { Connection, FilterQuery, Model } from "mongoose";
 import { Users, UsersDocument } from "./users.schema";
 
 @Injectable()
@@ -15,8 +15,8 @@ export class UsersService {
     return await (new this.usersModel(users)).save();
   }
 
-  async readAll(): Promise<Users[]> {
-    return await this.usersModel.find().exec();
+  async readAll(filter: FilterQuery<UsersDocument> = {}): Promise<Users[]> {
+    return await this.usersModel.find(filter).exec();
   }
 
   async readById(id: string): Promise<Users> {

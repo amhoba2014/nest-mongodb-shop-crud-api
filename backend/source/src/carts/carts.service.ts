@@ -1,6 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { InjectConnection, InjectModel } from "@nestjs/mongoose";
-import { Connection, Model } from "mongoose";
+import { Connection, FilterQuery, Model } from "mongoose";
 import { Carts, CartsDocument } from "./carts.schema";
 
 @Injectable()
@@ -15,8 +15,8 @@ export class CartsService {
     return await (new this.cartsModel(carts)).save();
   }
 
-  async readAll(): Promise<Carts[]> {
-    return await this.cartsModel.find().exec();
+  async readAll(filter: FilterQuery<CartsDocument> = {}): Promise<Carts[]> {
+    return await this.cartsModel.find(filter).exec();
   }
 
   async readById(id: string): Promise<Carts> {

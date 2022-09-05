@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post, Put } from "@nestjs/common";
+import { Body, Controller, Delete, Get, HttpException, HttpStatus, Param, Post, Put } from "@nestjs/common";
 import { ProductsService } from "./products.service";
 import { Products } from "./products.schema";
 import { ApiResponse, ApiTags } from "@nestjs/swagger";
@@ -49,7 +49,20 @@ export class ProductsController {
     type: Products
   })
   async delete(@Param('id') id: string) {
-    
+    let toDeleteProduct = await this.productsService.readById(id)
+
+    let relatedCarts = await this.cartsService.readAll({
+      items: {
+        $elemMatch: {
+          $eq: id
+        }
+      }
+    })
+
+    if (relatedCarts.length != 0) {
+      throw new HttpException("This product is in some user's cart", HttpStatus.FORBIDDEN)
+    }
+
     return await this.productsService.delete(id);
   }
 }
