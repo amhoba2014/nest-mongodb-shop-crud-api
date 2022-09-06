@@ -41,9 +41,26 @@ Currently this project is in the simplest form possible. If in the future some e
 
 And lastly to make it truely scalable we should turn this project into a kubernetes compatible one, which means adding an appropriate `kubefile.yml` and provide instructions and bash files for kubernetes deployment.
 
+![Architecture Diagram](./architecture.png "Architecture Diagram")
+
 ## Considerations
 
-- Definitely there will be a need for more CRUD and REST endpoints, but it all depends on the user interface and the contracts between user interface and the backend. Also for the sake of time constraint and simplicity, I have ignored and not thought about more than that.
+Definitely there will be a need for more CRUD and REST endpoints, but it all depends on the user interface and the contracts between user interface and the backend. Also for the sake of time constraint and simplicity, I have ignored and not thought about more than that.
+
+## Testing
+
+We tried to incorporate `mongodb-memory-server` into our tests but it did not fit well (it does not fit well into the CI pipeline as it does not auto download the mongodb binary on `npm install` - although its github page claims that it should), so we decided to move to a whole different way of testing.
+
+We test our app exactly the same way we want to run it in production (and in our dev environment) with the help of containerization technology. This may sound counterintuitive but it has several benefits:
+
+- Dev and Test and Production environments are all the same. This means that we have **zero** guess about our code and the way it will run
+- There is less code, library and moving parts to manage and think about. This greatly reduces time to deployment and **time to market**.
+
+Although mocking is a good thing and it helps to perform unit tests without taking into account the implementation details of the depending units, it's been a decade or two that it is being used as a testing measure.
+
+And lets be honest, using mocks is a hassle. And with the current best practices of "mocking to the extreme", it nearly doubles your codebase to have a mock of every unit. Not to mention, its also a refactoring nightmare.
+
+So I decided to put the default as to not use mocks, and only and only mock if tests fail when a depending unit is not performing as it should.
 
 ## Assessment PDF Questions:
 
@@ -60,7 +77,7 @@ This project is still in development. I will update the todo list here as I cont
 - [ ] Postman file for apis
 - [ ] The DB script that generates the structure and the data to run this application
 - [ ] Write more nuanced tests.
-- [ ] Add a diagram to the `How to scale this?` part above.
+- [X] Add a diagram to the `How to scale this?` part above.
 - [ ] Authentication. Currently everybody can use the REST api. Its a critical security issue. We should authorize users based on their roles and tokens.
 - [ ] Make mongodb instance persistent. Although its enough for testing, We should consider making this project be usable for production too.
 - [X] The CI/CD pipeline is incomplete. Complete it.

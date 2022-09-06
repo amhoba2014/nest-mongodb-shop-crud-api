@@ -2,7 +2,7 @@ import { Body, Controller, Delete, Get, HttpException, HttpStatus, Param, Post, 
 import { UsersService } from "./users.service";
 import { Users } from "./users.schema";
 import { ApiResponse, ApiTags } from "@nestjs/swagger";
-import { CartsService } from "src/carts/carts.service";
+import { CartsService } from "../carts/carts.service";
 
 @ApiTags('users')
 @Controller('users')
