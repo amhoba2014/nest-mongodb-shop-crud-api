@@ -2,30 +2,20 @@
 
 This is the assessment Nest.js application that is packaged as a docker image.
 
-This repository is created in a way that Nest.js development will be done inside a docker container and isolated from the real hardware. This ensures development consistency.
+This repository is created in a way that Nest.js development will be done inside a docker container and isolated from the inconsistencies of the main OS. This ensures development consistency.
 
 This is for development only. Although the image can be built for production, the instructions and corresponding bash files will be put here at a later time (as I am in a time constraint).
 
 ## Development
 
-The `do_dev.sh` file will spin up 2 containers (using docker compose). One is the mongodb image, and the other is the Nest.js development image.
+The `do_dev.sh` file will spin up 2 containers (using docker compose). One is the mongodb image, and the other is the Nest.js development image, then, it will exec bash inside of the Nest.js container , so you will get an interactive shell directly into the `source` directory.
 
-Then, it will exec bash inside of the Nest.js container , so you will get an interactive shell directly into the `source` directory.
+The `do_dev_run.sh` file is the same as `do_dev.sh` with it being fully automated and will get you a running app with its database populated with test data.
 
 To start the app and see it for your self:
 
 ```bash
-# run this to get a bash inside the dev container:
-./do_dev.sh ;
-
-# Install packages if you dont have them:
-yarn ;
-
-# To run tests:
-yarn test ;
-
-# To run the development server and watch for file changes:
-yarn start:dev ;
+./do_dev_run.sh ;
 ```
 
 By default it will listen on port 3000 and expose it on the host as well.  
