@@ -74,12 +74,9 @@ I would have completed the github actions CI/CD pipeline yaml file, I would have
 This project is still in development. I will update the todo list here as I continue the development.
 
 - [X] In the delete apis, if there is a dependency between the data, it will give an error.
-- [ ] Postman file for apis
-- [ ] The DB script that generates the structure and the data to run this application
-- [ ] Write more nuanced tests.
+- [X] The DB script that generates the structure and the data to run this application
 - [X] Add a diagram to the `How to scale this?` part above.
 - [ ] Authentication. Currently everybody can use the REST api. Its a critical security issue. We should authorize users based on their roles and tokens.
-- [ ] Make mongodb instance persistent. Although its enough for testing, We should consider making this project be usable for production too.
 - [X] The CI/CD pipeline is incomplete. Complete it.
 
 
